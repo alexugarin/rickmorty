@@ -122,7 +122,7 @@ onMounted(async () => {
   flex-wrap: wrap;
   gap: 15px;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 
 .loader {
