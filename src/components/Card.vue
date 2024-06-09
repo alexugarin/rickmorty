@@ -35,7 +35,6 @@ async function fetchData() {
 //Функция установки цвета статуса
 function setStatusColor(character){
     const characterStatus = character.status.toLowerCase();
-    console.log(characterStatus)
     switch (characterStatus) {
         case 'alive':
             colorStatusIcon.value='green';
