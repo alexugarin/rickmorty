@@ -5,7 +5,7 @@
             <h3>{{ character.name }}</h3>
             <p><span class="semi-bold">Last known location: <br></span>{{ character.location.name }}</p>
             <p><span class="semi-bold">First seen in: <br></span>{{ firstSeen }}</p>
-            <p><span class="semi-bold"></span>{{ character.status }} - {{ character.species }}</p>
+            <p class="status"><span class="semi-bold"></span><span class="status__icon"></span>{{ character.status }} - {{ character.species }}</p>
         </div>
     </div>
 </template>
@@ -16,6 +16,8 @@ import { ref, onMounted } from 'vue';
 const props = defineProps(['character']);
 const firstSeen = ref(null);
 const error = ref(null);
+const colorStatusIcon = ref(null);
+setStatusColor(props.character);
 //Функция для получения name эпизода в котором появился впервые
 async function fetchData() {
     try {
@@ -27,6 +29,25 @@ async function fetchData() {
     }
     catch (err) {
         error.value = err.toString()
+    }
+}
+
+//Функция установки цвета статуса
+function setStatusColor(character){
+    const characterStatus = character.status.toLowerCase();
+    console.log(characterStatus)
+    switch (characterStatus) {
+        case 'alive':
+            colorStatusIcon.value='green';
+            break;
+        case 'dead':
+            colorStatusIcon.value='red';
+            break;
+        case 'unknown':
+            colorStatusIcon.value='gray';
+            break;
+        default:
+            break;
     }
 }
 
@@ -69,4 +90,18 @@ p {
 .semi-bold {
     font-weight: 600;
 }
+
+.status__icon{
+    height: 0.5rem;
+    width: 0.5rem;
+    margin-right: 0.375rem;
+    background: v-bind(colorStatusIcon);
+    border-radius: 50%;
+}
+.status{
+    display: flex;
+    align-items: center;
+    
+}
+
 </style>

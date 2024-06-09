@@ -19,6 +19,7 @@
         </select>
         <input v-model="name" id="name" type="text" placeholder="name...">
         <button @click="goToFilter">Применить</button>
+        <button @click="dropFilter">Сбросить</button>
       </div>
     </div>
     <div v-if="loading" class="loader"></div>
@@ -41,11 +42,18 @@ const info = ref(null)        //Информация о количестве с�
 const pages = ref(null)       //Количество страниц
 const prev = ref(null)        //Предыдущая страница
 const next = ref(null)        //Следующая страница
-const selectedPage = ref(null)//Текущая страница
+const selectedPage = ref(1)//Текущая страница
 const loading = ref(false)    //Флаг для лоадера
 const error = ref(null)       //Поле для ошибки
 const name = ref(null)        //Переменна для параметра name для фильтрации
 const status = ref(null)      //Переменна для параметра status для фильтрации
+
+//Сброс фильтров 
+function dropFilter(){
+  status.value = null;
+  name.value = null;
+  router.push({name: 'Characters', query: { page: 1 }})
+}
 
 //Смена станицы если используем фильтр кнопкой "применить"
 function goToFilter() {
@@ -123,6 +131,7 @@ onMounted(async () => {
   gap: 15px;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0 auto 0 auto;
 }
 
 .loader {
