@@ -1,25 +1,22 @@
 <template>
   <div>
     <div class="header">
-      <h1>characters</h1>
-      <div class="control-page">
-        <button @click="goTo(prev)" v-if="prev">Prev</button>
-        <select @change="goToSelectedPage($event)" v-model="selectedPage" v-if="pages" name="page" id="page">
-          <option :key="index" v-for="(index, page) in [...Array(pages).keys()]" :value="page + 1">{{ page + 1 }}
-          </option>
-        </select>
-        <button @click="goTo(next)" v-if="next">Next</button>
-      </div>
+      <h1>Rick and Morty | Characters</h1>
+      <Pagination :prev="prev" :next="next" :selectedPage="selectedPage" :pages="pages"/>
       <div class="filter">
-        <select v-model="status" name="status" id="status">
+        <div>
+          <select v-model="status" name="status" id="status">
           <option selected disabled value="null">Select status</option>
           <option value="alive">alive</option>
           <option value="dead">dead</option>
           <option value="unknown">unknown</option>
         </select>
         <input v-model="name" id="name" type="text" placeholder="name...">
-        <button @click="goToFilter">Применить</button>
-        <button @click="dropFilter">Сбросить</button>
+        </div>
+        <div>
+          <button @click="goToFilter">Применить</button>
+          <button @click="dropFilter">Сбросить</button>
+        </div>
       </div>
     </div>
     <div v-if="loading" class="loader"></div>
@@ -34,6 +31,7 @@
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import Card from '../components/Card.vue';
+import Pagination from '../components/Pagination.vue';
 
 const route = useRoute();     //Текущий роут
 const router = useRouter();
@@ -42,7 +40,7 @@ const info = ref(null)        //Информация о количестве с�
 const pages = ref(null)       //Количество страниц
 const prev = ref(null)        //Предыдущая страница
 const next = ref(null)        //Следующая страница
-const selectedPage = ref(1)//Текущая страница
+const selectedPage = ref(1)   //Текущая страница
 const loading = ref(false)    //Флаг для лоадера
 const error = ref(null)       //Поле для ошибки
 const name = ref(null)        //Переменна для параметра name для фильтрации
@@ -73,15 +71,6 @@ function goToFilter() {
     //Объект пуст, очищаем фильтр
     router.push({ name: 'Characters', query: { page: 1 } })
   }
-}
-//Функция слушатель для перехода по пагинации по кнопкам
-function goTo(path) {
-  let url = new URL(path);
-  router.push({ name: 'Characters', query: { ...route.query, page: url.searchParams.get("page") } })
-}
-// Функция слушатель для перехода по пагинации по выпадающему списку
-function goToSelectedPage(event) {
-  router.push({ name: 'Characters', query: { ...route.query, page: event.target.value } })
 }
 //Асинхронная функция для отправки запроса
 async function fetchData(path) {
@@ -156,6 +145,10 @@ onMounted(async () => {
 .header {
   display: flex;
   gap: 30px;
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    gap: 5px;
+  }
 }
 
 .control-page {
@@ -164,6 +157,18 @@ onMounted(async () => {
 }
 
 .filter {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  @media screen and (max-width: 450px) {
+    flex-direction: column;
+    gap: 5px;
+    align-items:flex-start;
+    padding-left:20px;
+  }
+}
+
+.filter div{
   display: flex;
   gap: 10px;
   align-items: center;
@@ -175,5 +180,9 @@ onMounted(async () => {
   font-size: 30px;
   display: flex;
   justify-content: center;
+}
+
+h1{
+  margin-left:30px;
 }
 </style>
