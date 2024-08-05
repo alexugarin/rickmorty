@@ -21,7 +21,7 @@ const pagesButtonArr = computed(() => {
     let result = [];
     try {
         if (props.pages > 4) {
-            if (props.selectedPage < props.pages - 4 && props.selectedPage > 4)
+            if (props.selectedPage < props.pages - 2 && props.selectedPage > 4)
                 result.push(1, "...", ...selected_window, '...', +props.pages);
             else if (props.selectedPage <= 4){
                 if (props.pages<=6)
@@ -30,7 +30,7 @@ const pagesButtonArr = computed(() => {
                     result.push(1, 2, 3, 4, 5, '...', +props.pages);
             }
             else if (props.selectedPage >= props.pages - 2)
-                result.push(1, "...", props.pages - 2, props.pages - 1, props.pages);
+                result.push(1, "...", props.pages - 3, props.pages - 2, props.pages - 1, props.pages);
             else {
                 throw new Error('Ошибка компонента пагинации!');
             }
