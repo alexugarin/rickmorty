@@ -30,8 +30,8 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Card from '../components/Card.vue';
-import Pagination from '../components/Pagination.vue';
+import Card from '@/components/Card.vue';
+import Pagination from '@/components/Pagination.vue';
 
 const route = useRoute();     //Текущий роут
 const router = useRouter();
