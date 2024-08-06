@@ -8,7 +8,8 @@
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
     "lint:script": "eslint --ext .ts,vue --ignore-path .gitignore .",
-    "lint:style": "stylelint src/**/*.{css,scss,vue}"
+    "lint:style": "stylelint src/**/*.{css,scss,vue}",
+		"lint:markup": "vue-tsc --noEmit"
   },
   "dependencies": {
     "vue": "^3.4.31"
