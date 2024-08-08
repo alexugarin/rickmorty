@@ -32,7 +32,7 @@ interface PaginationProps {
   prev: string | null;
   next: string | null;
   selectedPage: number;
-  pages: number | null;
+  pages: number;
 }
 
 const props = defineProps<PaginationProps>();

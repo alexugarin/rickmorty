@@ -133,7 +133,7 @@ async function fetchData(path: Record<string, string>): Promise<void> {
       .then(data => {
         characters.value = data.results;
         info.value = data.info;
-        pages.value = info.value.pages;
+        pages.value = info?.value.pages;
         prev.value = data.info.prev;
         next.value = data.info.next;
         selectedPage.value = Number(path.page) || 1;
