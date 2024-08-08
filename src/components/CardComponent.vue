@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
-import type { Character } from '@/types/types';
+import type { Character } from '../types/types';
 
 interface Props {
 	character: Character;

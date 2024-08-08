@@ -75,9 +75,9 @@
 <script setup lang="ts">
 import { onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import Card from '@/components/CardComponent.vue';
-import Pagination from '@/components/PaginationItem.vue';
-import { Info, Character } from '@/types/types.ts';
+import Card from '../components/CardComponent.vue';
+import Pagination from '../components/PaginationItem.vue';
+import { Info, Character } from '../types/types.ts';
 
 const route = useRoute();     //Текущий роут
 const router = useRouter();
