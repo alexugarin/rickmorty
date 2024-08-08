@@ -83,8 +83,8 @@ const route = useRoute();     //Текущий роут
 const router = useRouter();
 
 const characters = ref<Character[] | null>(null);  //Объект с персонажами на странице
-const info = ref<Info>(null);        //Информация о количестве страниц, ссылками на следующую страницу
-const pages = ref<number>(null);       //Количество страниц
+const info = ref<Info | null>(null);        //Информация о количестве страниц, ссылками на следующую страницу
+const pages = ref<number>(1);       //Количество страниц
 const prev = ref<string | null>(null);        //Предыдущая страница
 const next = ref<string | null>(null);        //Следующая страница
 const selectedPage = ref<number>(1);   //Текущая страница
@@ -133,7 +133,7 @@ async function fetchData(path: Record<string, string>): Promise<void> {
       .then(data => {
         characters.value = data.results;
         info.value = data.info;
-        pages.value = info?.value.pages;
+        pages.value = data.info.pages;
         prev.value = data.info.prev;
         next.value = data.info.next;
         selectedPage.value = Number(path.page) || 1;
