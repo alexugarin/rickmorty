@@ -1,7 +1,7 @@
-import { createRouter, createWebHistory } from "vue-router";
-import Characters from '@/views/Characters.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Characters from '@/views/CharactersPage.vue';
 
-const props = (route) => ({ page: Number(route.query.page) });
+const props = (route: any) => ({ page: Number(route.query.page) });
 const router = createRouter({
     history: createWebHistory(import.meta.env.BASE_URL),
     routes: [
@@ -22,5 +22,5 @@ const router = createRouter({
           },
     ],
   });
-  
+
   export default router;
