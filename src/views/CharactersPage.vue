@@ -126,7 +126,7 @@ async function fetchData(path: Record<string, string>): Promise<void> {
   const searchParams = new URLSearchParams(paramsObj);
   //Флаг для заглушки загрузки
   loading.value = true;
-  error.value = false;
+  error.value = '';
   try {
     await fetch(`https://rickandmortyapi.com/api/character?${searchParams.toString()}`)
       .then(response => response.json())
@@ -140,7 +140,7 @@ async function fetchData(path: Record<string, string>): Promise<void> {
       });
   }
   catch (err) {
-    error.value = err.toString();
+    error.value = (err as Error).toString();
   }
   finally {
     loading.value = false;
