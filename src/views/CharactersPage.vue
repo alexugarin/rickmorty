@@ -83,8 +83,8 @@ const route = useRoute();     //Текущий роут
 const router = useRouter();
 
 const characters = ref<Character[] | null>(null);  //Объект с персонажами на странице
-const info = ref<Info | null>(null);        //Информация о количестве страниц, ссылками на следующую страницу
-const pages = ref<number | null>(null);       //Количество страниц
+const info = ref<Info>(null);        //Информация о количестве страниц, ссылками на следующую страницу
+const pages = ref<number>(null);       //Количество страниц
 const prev = ref<string | null>(null);        //Предыдущая страница
 const next = ref<string | null>(null);        //Следующая страница
 const selectedPage = ref<number>(1);   //Текущая страница
