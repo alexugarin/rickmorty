@@ -3,7 +3,6 @@
     "Vue.volar",
     "EditorConfig.EditorConfig",
 		"dbaeumer.vscode-eslint",
-		"stylelint.vscode-stylelint",
-		tailwind
+		"stylelint.vscode-stylelint"
 	]
 }
