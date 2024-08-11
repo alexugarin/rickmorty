@@ -1,52 +1,63 @@
 <template>
 	<div>
-		<div class="header">
-			<h1>Rick and Morty | Characters</h1>
-			<pagination
-				:prev="prev"
-				:next="next"
-				:selected-page="selectedPage"
-				:pages="pages"
-			/>
-			<div class="filter">
-				<div>
-					<select
-						id="status"
-						v-model="status"
-						name="status"
-					>
-						<option
-							selected
-							disabled
-							value="null"
+		<div class="my-4 flex flex-col gap-1 md:flex-col sm:gap-4 mr-auto ml-auto md:w-11/12">
+			<h1>
+				Rick and Morty | Characters
+			</h1>
+			<div class="my-4 flex flex-col gap-1 md:flex-row sm:gap-8 md:justify-between">
+				<div class="flex lg:flex-row lg:gap-5 sm:items-start lg:items-center flex-col gap-1 items-start">
+					<div class="flex gap-3 items-center">
+						<select
+							id="status"
+							v-model="status"
+							class="block w-full p-1 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							name="status"
 						>
-							Select status
-						</option>
-						<option value="alive">
-							alive
-						</option>
-						<option value="dead">
-							dead
-						</option>
-						<option value="unknown">
-							unknown
-						</option>
-					</select>
-					<input
-						id="name"
-						v-model="name"
-						type="text"
-						placeholder="name..."
-					>
+							<option
+								selected
+								value="null"
+							>
+								Select status
+							</option>
+							<option value="alive">
+								alive
+							</option>
+							<option value="dead">
+								dead
+							</option>
+							<option value="unknown">
+								unknown
+							</option>
+						</select>
+						<input
+							id="name"
+							v-model="name"
+							class="block w-full p-1 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 text-sm focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							type="text"
+							placeholder="name..."
+						>
+					</div>
+					<div class="gap-2">
+						<button
+							class="btn btn-green"
+							@click="goToFilter"
+						>
+							Применить
+						</button>
+						<button
+							class="btn btn-yellow"
+							@click="dropFilter"
+						>
+							Сбросить
+						</button>
+					</div>
 				</div>
-				<div>
-					<button @click="goToFilter">
-						Применить
-					</button>
-					<button @click="dropFilter">
-						Сбросить
-					</button>
-				</div>
+				<pagination
+					:prev="prev"
+					:next="next"
+					:selected-page="selectedPage"
+					:pages="pages"
+				/>
 			</div>
 		</div>
 		<div
@@ -55,13 +66,13 @@
 		/>
 		<div
 			v-if="error"
-			class="error"
+			class="font-sans text-3xl flex justify-center"
 		>
 			Not Found
 		</div>
 		<div
 			v-if="characters && !loading"
-			class="container"
+			class="w-11/12 flex flex-row flex-wrap gap-5 justify-between mb-5 ml-auto mr-auto"
 		>
 			<card
 				v-for="character in characters"
@@ -90,8 +101,8 @@ const next = ref<string | null>(null);        //Следующая страни�
 const selectedPage = ref<number>(1);   //Текущая страница
 const loading = ref<boolean>(false);    //Флаг для лоадера
 const error = ref<string | null>(null);       //Поле для ошибки
-const name = ref<string | null>(null);        //Переменна для параметра name для фильтрации
-const status = ref<string | null>(null);      //Переменна для параметра status для фильтрации
+const name = ref<string | null>(null);        //Переменная для параметра name для фильтрации
+const status = ref<string | null>(null);      //Переменная для параметра status для фильтрации
 
 //Сброс фильтров
 function dropFilter(){
@@ -106,7 +117,11 @@ function goToFilter(): void {
   if (name.value != null && name.value != undefined) {
     query.name = name.value;
   }
-  if (status.value != null && status.value != undefined) {
+	if (
+		status.value != null &&
+		status.value != undefined &&
+		status.value != 'null'
+	){
     query.status = status.value;
   }
   //Проверяем существующие фильтры
@@ -160,16 +175,6 @@ onMounted(async () => {
 </script>
 
 <style scoped>
-.container {
-  width: 95%;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 auto 0 auto;
-}
-
 .loader {
   font-weight: bold;
   font-family: sans-serif;
@@ -187,49 +192,5 @@ onMounted(async () => {
   to {
     opacity: 0
   }
-}
-
-.header {
-  display: flex;
-  gap: 30px;
-  @media screen and (max-width: 450px) {
-    flex-direction: column;
-    gap: 5px;
-  }
-}
-
-.control-page {
-  display: flex;
-  align-items: center;
-}
-
-.filter {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  @media screen and (max-width: 450px) {
-    flex-direction: column;
-    gap: 5px;
-    align-items:flex-start;
-    padding-left:20px;
-  }
-}
-
-.filter div{
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.error {
-  font-weight: bold;
-  font-family: sans-serif;
-  font-size: 30px;
-  display: flex;
-  justify-content: center;
-}
-
-h1{
-  margin-left:30px;
 }
 </style>
