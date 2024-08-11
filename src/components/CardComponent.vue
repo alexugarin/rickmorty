@@ -1,15 +1,18 @@
 <template>
-	<div class="card">
+	<div class="bg-gray-50 rounded-md w-72 shadow-md">
 		<img
+			class="w-72 h-72 rounded-t-md"
 			:src="character.image"
 			:alt="character.name"
 		>
-		<div>
-			<h3>{{ character.name }}</h3>
-			<p><span class="semi-bold">Last known location: <br></span>{{ character.location.name }}</p>
-			<p><span class="semi-bold">First seen in: <br></span>{{ firstSeen }}</p>
-			<p class="status">
-				<span class="semi-bold" /><span class="status__icon" />{{ character.status }} - {{ character.species }}
+		<div class="pl-5">
+			<h3 class="mt-3">
+				{{ character.name }}
+			</h3>
+			<p><span class="font-semibold">Last known location: <br></span>{{ character.location.name }}</p>
+			<p><span class="font-semibold">First seen in: <br></span>{{ firstSeen }}</p>
+			<p class="flex items-center">
+				<span class="font-semibold" /><span class="status__icon" />{{ character.status }} - {{ character.species }}
 			</p>
 		</div>
 	</div>
@@ -66,38 +69,10 @@ onMounted(() => {
 </script>
 
 <style scoped>
-.card {
-	background-color: hsl(0, 0%, 100%);
-	border-radius: 5px;
-	width: 300px;
-
-	box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
-}
-
-img {
-	width: 300px;
-	height: 300px;
-}
-
-.card div {
-	padding-left: 20px;
-}
-
-h3 {
-	font-weight: 800;
-	font-size: 18px;
-	margin-bottom: 20px;
-	margin-top: 20px;
-}
-
 p {
 	font-size: 14px;
 	color: hsl(200, 15%, 8%);
 	margin: 8px 0 8px 0;
-}
-
-.semi-bold {
-	font-weight: 600;
 }
 
 .status__icon{
@@ -107,10 +82,4 @@ p {
 	background: v-bind(colorStatusIcon);
 	border-radius: 50%;
 }
-.status{
-	display: flex;
-	align-items: center;
-
-}
-
 </style>

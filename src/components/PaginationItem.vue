@@ -1,7 +1,8 @@
 <template>
-	<div class="control-page">
+	<div class="flex gap-2 items-center">
 		<button
 			v-if="prev"
+			class="btn btn-dark"
 			@click="goTo(prev)"
 		>
 			Prev
@@ -17,6 +18,7 @@
 		</ul>
 		<button
 			v-if="next"
+			class="btn btn-dark"
 			@click="goTo(next)"
 		>
 			Next
@@ -109,8 +111,5 @@ li{
 }
 .selected{
 	font-weight: bold;
-}
-button{
-	margin-inline: 20px;
 }
 </style>
